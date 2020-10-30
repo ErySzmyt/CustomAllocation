@@ -14,25 +14,29 @@ int main()
 
 
     int numOfCells = 0;
-    
+    //calculating number of cells for flat array
     for (int i = 1; i <= r; i++)
         numOfCells += (2 * i - 1);
     for (i = r - 1; i >= 1; i--)
         numOfCells += (2 * i - 1);
 
+    //flat array for memory allocation
     int* pointers = new int[numOfCells];
+    //multi-dimension array for pointers
     int*** Cpointers = new int** [(r * 2) - 1];
 
+    //printing number of cells
     std::cout << "numOfCells: " << numOfCells << std::endl;
 
 
+    //variable for number of overriten Cells
     int overritenCells = 0;
 
     for (int i = 1; i <= r; i++)
     {
         std::cout << "Position: " << (i - 1) << " Number of cells" << "* " << (2 * i - 1) << std::endl;
 
-        //assigning array
+        //assigning array for 
         Cpointers[i - 1] = new int*[2 * i - 1];
 
         //filling flat array
@@ -60,6 +64,7 @@ int main()
     std::cout << std::endl << std::endl << std::endl;
     
 
+    //printing tables 
     overritenCells = 0;
     for (int i = 1; i <= r; i++)
     {
@@ -78,8 +83,11 @@ int main()
     std::cout << std::endl << std::endl << std::endl;
 
     
-    std::cout << Cpointers[1][2] << std::endl;
-    std::cout << Cpointers[1][5] << std::endl;
+    std::cout << Cpointers[1][2] << "(" << *Cpointers[1][2] << ")" << std::endl;
+    std::cout << Cpointers[1][2] + 1 << "(" << *(Cpointers[1][2] + 1) << ")" << std::endl;
+
+    std::cout << Cpointers[1][3] << std::endl; //still broken :(
+
   
     system("pause");
 }

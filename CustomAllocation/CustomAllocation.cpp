@@ -86,7 +86,8 @@ int main()
     std::cout << Cpointers[1][2] << "(" << *Cpointers[1][2] << ")" << std::endl;
     std::cout << Cpointers[1][2] + 1 << "(" << *(Cpointers[1][2] + 1) << ")" << std::endl;
 
-    std::cout << Cpointers[1][3] << std::endl; //still broken :(
+    //Gives a magic number that only a true wizard will know
+    std::cout << Cpointers[1][3] << std::endl; //still broken :(  
 
   
     system("pause");

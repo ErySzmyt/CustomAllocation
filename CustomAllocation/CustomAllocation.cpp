@@ -23,7 +23,7 @@ int main()
     //flat array for memory allocation
     int* pointers = new int[numOfCells];
     //multi-dimension array for pointers
-    int*** Cpointers = new int** [(r * 2) - 1];
+    int** Cpointers = new int* [(r * 2) - 1];
 
     //printing number of cells
     std::cout << "numOfCells: " << numOfCells << std::endl;
@@ -37,12 +37,12 @@ int main()
         std::cout << "Position: " << (i - 1) << " Number of cells" << "* " << (2 * i - 1) << std::endl;
 
         //assigning array for 
-        Cpointers[i - 1] = new int*[2 * i - 1];
+        Cpointers[i - 1] = new int[2 * i - 1];
 
         //filling flat array
         for (int z = 0; z <  (2 * i - 1); z++) {
             pointers[z + overritenCells] = (i - 1);
-            Cpointers[i - 1][z] = &pointers[z + overritenCells];
+            Cpointers[i - 1][z] = pointers[z + overritenCells];
         }
 
         overritenCells += (2 * i - 1);
@@ -52,12 +52,12 @@ int main()
         std::cout << "Position: " << (-i + (2 * r)) - 1 << " Number of cells" << "* " << 2 * i - 1 << std::endl;
         
         //assigning array
-        Cpointers[(-i + (2 * r)) - 1] = new int*[2 * i - 1];
+        Cpointers[(-i + (2 * r)) - 1] = new int[2 * i - 1];
 
         //filling array
         for (int z = 0; z < (2 * i - 1); z++) {
             pointers[(-i + (2 * r)) - 1] = (i - 1);
-            Cpointers[(-i + (2 * r)) - 1][z] = &pointers[(-i + (2 * r)) - 1];
+            Cpointers[(-i + (2 * r)) - 1][z] = pointers[(-i + (2 * r)) - 1];
         }
     }
 
@@ -69,13 +69,13 @@ int main()
     for (int i = 1; i <= r; i++)
     {
         for (int z = 0; z < (2 * i - 1); z++)
-            std::cout << Cpointers[i - 1][z] << "(" << *Cpointers[i - 1][z] << ")" << " ";
+            std::cout << Cpointers[i - 1][z] << "(" << Cpointers[i - 1][z] << ")" << " ";
         std::cout << std::endl;
     }
     for (i = r - 1; i >= 1; i--)
     {
         for (int z = 0; z < (2 * i - 1); z++)
-            std::cout << Cpointers[(-i + (2 * r)) - 1][z] << "(" << *Cpointers[(-i + (2 * r)) - 1][z] << ")" << " ";
+            std::cout << Cpointers[(-i + (2 * r)) - 1][z] << "(" << Cpointers[(-i + (2 * r)) - 1][z] << ")" << " ";
         std::cout << std::endl;
     }
 
@@ -83,8 +83,8 @@ int main()
     std::cout << std::endl << std::endl << std::endl;
 
     
-    std::cout << Cpointers[1][2] << "(" << *Cpointers[1][2] << ")" << std::endl;
-    std::cout << Cpointers[1][2] + 1 << "(" << *(Cpointers[1][2] + 1) << ")" << std::endl;
+    std::cout << &Cpointers[1][2] << "(" << Cpointers[1][2] << ")" << std::endl;
+    std::cout << &Cpointers[1][2] + 1 << "(" << (Cpointers[1][2] + 1) << ")" << std::endl;
 
     //Gives a magic number that only a true wizard will know
     std::cout << Cpointers[1][3] << std::endl; //still broken :(  
